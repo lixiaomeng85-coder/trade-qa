@@ -61,7 +61,7 @@ function parseMd(md){
 }
 function mdToHtml(md){
  let s=esc(md);
- s=s.replace(/!\[([^\]]*)\]\(([^)]+)\)/g,'<img alt="$1" src="$2">');
+ s=s.replace(/!\[([^\]]*)\]\(([^)]+)\)/g,'< img alt="$1" src="$2">');
  s=s.replace(/^### (.*)$/gm,"<h3>$1</h3>").replace(/^## (.*)$/gm,"<h2>$1</h2>");
  s=s.replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>");
  s=s.replace(/`([^`]+)`/g,"<code>$1</code>");
@@ -81,14 +81,21 @@ async function load(){
 function buildCats(){
  const cats=["全部",...new Set(all.map(x=>x.category).filter(Boolean))];
  $("cats").innerHTML=cats.map(x=>`<button class="chip ${x===currentCat?"on":""}" data-cat="${esc(x)}">${esc(x)}</button>`).join("");
- document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{currentCat=b.dataset.cat;buildCats();render()});
+ document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{
+    currentCat=b.dataset.cat;
+    if($("detailView").style.display !== "none"){
+        showList();
+    }
+    buildCats();
+    render();
+ });
 }
 function render(){
  const kw=$("search").value.trim().toLowerCase();
  const rows=all.filter(x=>(currentCat==="全部"||x.category===currentCat)&&(`${x.title} ${x.summary} ${x.category} ${x.spanish} ${x.body}`.toLowerCase().includes(kw)));
  $("count").textContent=`找到 ${rows.length} 条 / 共 ${all.length} 条`;
  $("grid").innerHTML=rows.map(x=>`<article class="card" onclick="openDetail('${encodeURIComponent(x.slug)}')">
-   ${x.cover?`<img src="${esc(x.cover)}" alt="">`:""}
+   ${x.cover?`< img src="${esc(x.cover)}" alt="">`:""}
    <span class="tag">${esc(x.category||"其他")}</span>
    <h2>${esc(x.title)}</h2><div class="summary">${esc(x.summary||"")}</div><div class="more">查看详细信息 →</div>
  </article>`).join("");
@@ -102,7 +109,7 @@ function openDetail(encoded){
    <button class="back" onclick="showList()">← 返回 Q&A 列表</button>
    <span class="tag">${esc(x.category||"其他")}</span>
    <h2>${esc(x.title)}</h2>
-   ${x.cover?`<img class="cover" src="${esc(x.cover)}" alt="">`:""}
+   ${x.cover?`< img class="cover" src="${esc(x.cover)}" alt="">`:""}
    <div class="answer"><strong>📌 简短答案</strong><br>${esc(x.summary||"")}</div>
    <div class="body">${mdToHtml(x.body||"")}</div>
    ${x.spanish?`<div class="spanish"><strong>🇪🇸 西班牙语话术</strong><pre id="spanishText">${esc(x.spanish)}</pre><button class="copy" onclick="copySpanish()">复制话术</button></div>`:""}
