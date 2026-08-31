@@ -1,24 +1,11 @@
 ---
-title: "CNEE 是什么意思？"
-category: "收货人"
-summary: "CNEE 是收货人的意思。"
-spanish: ""
-cover: ""
+title: CNEE 是什么意思？
+category: 收货人
+summary: CNEE 是收货人的意思。
+spanish: 全称：consignee
 featured: false
 ---
-
 ## 简短答案
 
-CNEE 是收货人的意思。
+CNEE 是收货人的意思。全称：consignee。
 
-## 详细说明
-
-请在这里补充更完整的处理流程、注意事项、案例和内部经验。
-
-## 西班牙语话术
-
-<!-- 需要西语回复时，可直接填写在这里。 -->
-
-## 相关图片
-
-<!-- 在“详细说明”或本区域插入图片即可。上传后图片会显示在 Q&A 详情页。 -->
