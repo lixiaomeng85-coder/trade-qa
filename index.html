@@ -5,107 +5,115 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>外贸业务 Q&A 知识库</title>
 <style>
-:root{--bg:#f6f7fb;--card:#fff;--text:#172033;--muted:#697386;--line:#e5e7eb;--accent:#4f46e5}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif}
-header{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
-.wrap{max-width:1120px;margin:auto;padding:0 20px}.hero{padding:30px 0 22px}
-h1{margin:0;font-size:30px;letter-spacing:-.5px}.sub{margin-top:8px;color:var(--muted)}
-.search{margin-top:20px;display:flex;gap:10px}.search input{flex:1;padding:15px 17px;border:1px solid #d6d9e0;border-radius:12px;font-size:16px;outline:0;background:#fff}
-.search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px #4f46e522}
-main{padding:28px 0 50px}.topline{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:15px;color:var(--muted);font-size:14px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:15px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:19px;transition:.15s;cursor:pointer}
-.card:hover{transform:translateY(-1px);box-shadow:0 7px 24px #1118270d}
-.tag{display:inline-block;background:#eef2ff;color:#4338ca;border-radius:999px;padding:4px 9px;font-size:12px;font-weight:600}
-h2{font-size:17px;line-height:1.5;margin:10px 0 9px}.answer{color:#4b5563;line-height:1.75;font-size:14px}
-.empty{text-align:center;padding:60px 20px;color:var(--muted);display:none}
-.notice{margin-top:22px;padding:15px 17px;background:#fff7ed;border:1px solid #fed7aa;border-radius:13px;color:#9a3412;line-height:1.65;font-size:14px}
-footer{padding:25px 0 45px;text-align:center;color:#9ca3af;font-size:13px}
-mark{background:#fef08a;padding:0 2px}
-@media(max-width:600px){h1{font-size:25px}.grid{grid-template-columns:1fr}.wrap{padding:0 14px}}
+*{box-sizing:border-box}body{margin:0;background:#f6f7fb;color:#172033;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif}
+header{background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:0;z-index:20}.wrap{max-width:1120px;margin:auto;padding:0 20px}
+.hero{padding:28px 0 20px}h1{margin:0;font-size:30px}.sub{margin:8px 0 18px;color:#6b7280}
+.search{width:100%;padding:15px 17px;border:1px solid #d6d9e0;border-radius:12px;font-size:16px;outline:0}.search:focus{border-color:#4f46e5;box-shadow:0 0 0 3px #4f46e522}
+.toolbar{display:flex;gap:8px;overflow:auto;padding:12px 0 2px}.chip{border:1px solid #d8dbe2;background:#fff;border-radius:999px;padding:7px 13px;white-space:nowrap;cursor:pointer}.chip.on{background:#4f46e5;color:#fff;border-color:#4f46e5}
+main{padding:28px 0 55px}.top{display:flex;justify-content:space-between;gap:15px;color:#6b7280;font-size:14px;margin-bottom:15px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:15px}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:18px;cursor:pointer;transition:.15s;overflow:hidden}.card:hover{transform:translateY(-2px);box-shadow:0 10px 26px #11182712}
+.card img{width:100%;height:170px;object-fit:cover;border-radius:11px;margin-bottom:13px}.tag{display:inline-block;background:#eef2ff;color:#4338ca;border-radius:999px;padding:4px 9px;font-size:12px}
+.card h2{font-size:17px;line-height:1.5;margin:10px 0}.summary{color:#596273;line-height:1.7;font-size:14px}.more{margin-top:12px;color:#4f46e5;font-size:14px;font-weight:600}
+.detail{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:26px;max-width:920px;margin:auto}.back{border:0;background:none;color:#4f46e5;padding:0;margin-bottom:18px;cursor:pointer;font-size:15px}
+.detail h2{font-size:29px;margin:5px 0 10px}.detail .cover{max-width:100%;max-height:430px;object-fit:cover;border-radius:14px;margin:12px 0 20px}.answer{background:#f8fafc;border:1px solid #eef0f3;border-radius:12px;padding:16px;line-height:1.75}
+.body{line-height:1.9;color:#374151}.body h2,.body h3{color:#172033;margin-top:26px}.body img{display:block;max-width:100%;border-radius:13px;margin:14px 0}.body a{color:#4f46e5}
+.spanish{margin-top:20px;background:#f5f3ff;border:1px solid #ddd6fe;border-radius:13px;padding:15px}.spanish pre{white-space:pre-wrap;font:inherit;line-height:1.7;margin:10px 0}
+.copy{border:0;border-radius:9px;background:#111827;color:#fff;padding:9px 13px;cursor:pointer}
+.notice{margin-top:22px;padding:14px 16px;background:#fff7ed;border:1px solid #fed7aa;border-radius:13px;color:#9a3412;line-height:1.65;font-size:14px}
+.empty{text-align:center;padding:60px;color:#6b7280}footer{text-align:center;color:#9ca3af;padding:30px}
+@media(max-width:600px){.wrap{padding:0 14px}h1{font-size:25px}.detail{padding:19px}.detail h2{font-size:23px}}
 </style>
 </head>
 <body>
 <header><div class="wrap hero">
 <h1>📚 外贸业务 Q&A 知识库</h1>
-<div class="sub">FOB · 物流 · 清关 · 付款 · 空运 · 海运 · 西语 · 各国业务要求</div>
-<div class="search"><input id="q" autocomplete="off" placeholder="搜索关键词，例如：FOB、DDP、阿根廷、订舱、付款、HS 编码……"></div>
+<div class="sub">搜索问题 · 分类筛选 · 查看详细流程 · 图片资料 · 一键复制西语话术</div>
+<input class="search" id="search" placeholder="搜索 FOB、DDP、阿根廷、付款、订舱、HS 编码……">
+<div class="toolbar" id="cats"></div>
 </div></header>
 <main><div class="wrap">
-<div class="topline"><span id="count"></span><span>输入关键词即可实时查询</span></div>
-<section class="grid" id="grid"></section>
-<div class="empty" id="empty">没有找到相关内容，换个关键词试试。</div>
-<div class="notice">⚠️ 本知识库根据公司《工作Q&A.pdf》整理。原资料中部分规则存在冲突或信息不完整（例如部分国家 DDP、40NOR 容量），遇到这类内容请以公司最新规则及货代确认结果为准，不要直接对客户作出承诺。</div>
-</div></main>
-<footer>外贸业务 Q&A 知识库</footer>
+<div id="listView"><div class="top"><span id="count">正在加载…</span><span>点击卡片查看详情</span></div><div class="grid" id="grid"></div></div>
+<div id="detailView" style="display:none"></div>
+<div class="notice">⚠️ 本知识库根据公司现有《工作Q&A.pdf》整理。原资料部分规则存在冲突或信息不完整，例如部分国家 DDP、40NOR 容量等；遇到这类问题请以公司最新规则及货代确认结果为准。</div>
+</div></main><footer>外贸业务 Q&A 知识库</footer>
 <script>
-const data = [
-["基础术语","partidas arancelarias 是什么？","partidas arancelarias = HS 编码。"],
-["基础术语","NCM 是什么？","NCM 是海关编码。"],
-["订舱","订舱需要哪些信息？","需要公司名称、RUT/税号、地址、电话、邮箱等。空运和海运需要分别确认，同一客户的信息不一定相同。"],
-["订舱","跟客户订舱可以怎么说？","Me puede mandar el nombre de su empresa, rut, direccion, cel y correo para hacer la reservacion con el agente, gracias."],
-["清关","客户清关需要什么资料？","装箱单和发票。"],
-["贸易术语","DAP 和 DDP 有什么区别？","DAP：不含税，不负责清关。DDP：含税 + 清关 + 到家。"],
-["贸易术语","快递属于什么贸易术语？","快递属于 DAP。"],
-["FOB","FOB 目的港费用谁负责？","FOB 负责到中国港口，之后的费用客户需要咨询自己的当地货代。"],
-["CIF","CIF 的清关费和目的港费用谁确认？","可以报一个大概的目的港船公司费用；清关、税金等需要客户咨询当地海关代理。"],
-["FOB","工厂直接给客户报 FOB，我们需要报关吗？","如果工厂直接给客户做 FOB 价格，则由工厂负责报关。只有跟我们公司做 FOB，我们才能给客户报关。"],
-["FOB","工厂直接做 FOB 的流程？","工厂提供装箱单、发票、装柜图并确认装柜时间；我们订船并报价海运费，再确认提单信息，确认无误后提供 BL。"],
-["FOB","FOB 包含哪些费用？","资料记录：FOB 包含 ORC 和 THC。"],
-["集装箱","整柜常见柜型和容量？","20GP：28 CBM；40NOR：资料记录 55 CBM；40HQ / 40ST / 40HC：68 CBM。资料另有 40NOR 58 CBM 的记录，使用时建议以货代当前确认数据为准。"],
-["集装箱","一个柜子最多称重多少？","资料记录：一个柜子最多称重 25T；小柜最大承载 25 吨以内可以。"],
-["FOB","散货 FOB 怎么收？","18 个方以内基本按 1000 USD；20 个方以上约 1200 USD。资料还记录 23 方 1200 USD、26 方 1400 USD。"],
-["FOB","整柜 FOB 如何分摊到产品？","仅适用于整柜。资料示例：整柜 FOB 1200 USD、出厂价 2 USD、4 CBM、20 个，则 FOB 分摊后单价为 5.529 USD。"],
-["报价","FOB 加点怎么收？","资料记录：市场化妆品 FOB 加 25 个点；市场常规货 FOB 加 20 个点；工厂装柜 FOB 加 15 个点；1688 产品报 FOB 加 25 个点。"],
-["订单","订单金额低于 2000 USD 怎么发？","资料记录：2000 USD 以下的订单只发空运。"],
-["空运","空运重量怎么计算？","体积重量=长×宽×高/5000；按资料规则进位；实际重量和体积重量取较重者作为计费重量。"],
-["空运","空运发票有什么要求？","产品名称不能用统称；相同产品需要合并；使用常规箱单发票模板。"],
-["快递","DHL 客户没有清关代理怎么办？","客户最好有海关代理（agente de aduana）。如果没有，DHL 也有合作清关行；到客户国家后 DHL 会给客户发送链接并交税、清关。"],
-["仓库","客户自己采购并发到我们仓库，我们负责什么？","只负责收货，不提供报价、验货和采购服务；需要简单拍照确认是否到齐、是否有侵权货，并重新测量箱规和重量。"],
-["仓库","客户货发到指定中国仓库前要注意什么？","提前联系仓库联系人，确认仓库什么时候收货，避免货到了仓库却无人接收。"],
-["阿根廷","阿根廷寄样品有什么要求？","产品上需贴：muestra sin valor comercial / valor solo a los efectos aduaneros。"],
-["阿根廷","阿根廷产品有什么标签要求？","资料记录：阿根廷产品需要贴标签；所有产品需要有 Made in China，贴彩盒即可。"],
-["秘鲁","秘鲁有什么产品要求？","拖鞋需要贴标签。RUC 20 为公司税号，RUC 10 为个人税号；两种都可以进口，但单次进口只能选择其中一种。"],
-["电池/特殊品","电池产品能不能空运/海运？","资料记录：空运带电池不好出，带磁性产品也不好出。电池数量多时按危险品处理，需要 MSDS、海运鉴定报告、危包证等资料。"],
-["特殊品","劳保、医疗产品需要什么？","需要 MSDS 安全证书。"],
-["特殊品","铅酸电池出口需要什么？","需要 MSDS 证书。"],
-["包装","木头、竹子包装有什么要求？","木头需要熏蒸；竹子需要商检。"],
-["DDP","客户问 DDP 到货后谁负责送到家？","资料记录：联系我们即可，我们问义乌的货代。"],
-["DDP","哪些国家可以做 DDP？","资料记录：美国、墨西哥可以做 DDP；哥伦比亚可以做门到门；智利的资料存在“可以做”和“费用太高做不了”的冲突，因此下单前必须确认当前货代政策。"],
-["玻利维亚","玻利维亚玩具有什么要求？","资料记录：玻利维亚玩具需要拆装。"],
-["海运","预计到港时间怎么查？","先问货代走的什么船公司，再去船公司官网填写柜子号查询。"],
-["提单","BL / Telex 是什么？","Telex = 电放；资料也记录“Telex = BL”。船开之后，船公司会发给外贸公司提单。"],
-["海运","POL 是什么？","POL = Port of Loading，装货港/起运港。"],
-["收货人","CNEE 是什么意思？","CNEE 是收货人的意思。"],
-["付款","NRO 转账时填什么？","NRO 填合同号。"],
-["付款","DIRECCION POSTAL 是什么意思？","地址。"],
-["付款","没有 NUMERO DE RUTA / TRANSITO / ABA 怎么办？","没有这个信息就不填，留空即可。只填写已有信息。"],
-["付款","USDT 手续费谁承担？","资料记录：USDT 手续费需要客户自己承担，转账按照 PI 金额转即可。"],
-["付款","客户付款会产生哪些银行手续费？","客户银行和中间行都会收手续费；资料记录信用卡中间行手续费为 3 个点，但客户自己的银行还可能收取费用。"],
-["付款","付款链接支持什么？","资料记录：付款链接只能使用 VISA，Mastercard、PayPal 都不能用。创建付款链接需要客户邮箱和完整姓名。"],
-["清关","PI 和发票金额需要一致吗？","资料记录：客户如果按照 50% 金额清关，PI 和发票也需要提供 50% 的版本。"],
-["报关","发货清单/报关资料给谁看？","资料记录：出货清单和报关资料是给中国港口海关看的，不是给国外海关看的。"],
-["报关","报关前发现进仓件数不一致怎么办？","如果还没报关，发现件数不一致，可以修改报关资料。"],
-["报关","报关后发现进仓件数和报关资料不一致怎么办？","资料记录：需要撤回报关资料，可能被查验；如发现瞒报等问题，可能产生仓储费、退回费、罚款等费用。"],
-["报关","报关品名和提单品名有什么要求？","报关品名和提单品名要求对应；箱单上的信息也需要和提单保持一致。"],
-["报关","相同类型产品在报关清单里怎么处理？","相同类型产品需要合并；0 税率产品也需要合并。"],
-["阿根廷","阿根廷海关编码怎么确定？","一般按照客户那边的标准，需要客户提供；有时我们使用的编码和客户国家的不一样。"],
-["供应商","工厂名字和证书名字不一致怎么办？","资料记录：以证书上的名字为准。"],
-["供应商","如何判断供应商更像工厂还是中间商？","可以看阿里巴巴销售品类；资料记录认为多品类混卖应判断为中间商。营业执照只能证明公司存在，不能单独确定是工厂还是中间商。"],
-["报价","客户发了供应商联系方式会加点吗？","资料记录：客户发了供应商联系方式，这种情况下不加点。"],
-["侵权/合规","侵权产品怎么处理？","资料记录：侵权费用也叫特报费；一个柜子最多可装 50 CBM 侵权货；另有记录一个柜子需要 18 CBM 普货，否则没办法出。遇到侵权或高风险产品不要自行承诺，先确认合规方案。"],
-["客户沟通","客户长期不下单怎么回复？","资料中已有西语话术：说明持续投入了产品搜索、报价和跟进，但长期没有订单；由于运营成本和优先服务正在进行的项目，暂时停止免费报价；未来如继续项目，可通过预付定金方式继续支持。"]
-];
-
-const grid=document.getElementById('grid'), q=document.getElementById('q'), count=document.getElementById('count'), empty=document.getElementById('empty');
-function esc(s){return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
-function render(){
- const kw=q.value.trim().toLowerCase();
- const rows=data.filter(x=>(x.join(' ').toLowerCase()).includes(kw));
- grid.innerHTML=rows.map(x=>`<article class="card"><span class="tag">${esc(x[0])}</span><h2>${esc(x[1])}</h2><div class="answer">${esc(x[2])}</div></article>`).join('');
- count.textContent=`找到 ${rows.length} 条 / 共 ${data.length} 条`;
- empty.style.display=rows.length?'none':'block';
+const owner="lixiaomeng85-coder", repo="trade-qa", branch="main";
+let all=[], currentCat="全部";
+const $=id=>document.getElementById(id);
+function esc(s){return String(s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));}
+function parseMd(md){
+ let front={}, body=md;
+ if(md.startsWith("---")){
+   const end=md.indexOf("\n---",3);
+   if(end>0){
+     md.slice(3,end).trim().split("\n").forEach(line=>{
+       const i=line.indexOf(":");
+       if(i>0){
+         let k=line.slice(0,i).trim(), v=line.slice(i+1).trim();
+         v=v.replace(/^"(.*)"$/,"$1").replace(/\\\"/g,'"');
+         front[k]=v;
+       }
+     });
+     body=md.slice(end+4).trim();
+   }
+ }
+ return {...front, body};
 }
-q.addEventListener('input',render); render();
+function mdToHtml(md){
+ let s=esc(md);
+ s=s.replace(/!\[([^\]]*)\]\(([^)]+)\)/g,'<img alt="$1" src="$2">');
+ s=s.replace(/^### (.*)$/gm,"<h3>$1</h3>").replace(/^## (.*)$/gm,"<h2>$1</h2>");
+ s=s.replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>");
+ s=s.replace(/`([^`]+)`/g,"<code>$1</code>");
+ s=s.replace(/\n\n/g,"<br><br>").replace(/\n/g,"<br>");
+ return s;
+}
+async function load(){
+ try{
+  const r=await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/content/qa?ref=${branch}`,{cache:"no-store"});
+  if(!r.ok) throw new Error("GitHub API error "+r.status);
+  const files=await r.json();
+  const mdFiles=files.filter(x=>x.name.endsWith(".md"));
+  all=await Promise.all(mdFiles.map(async f=>({...parseMd(await (await fetch(f.download_url+"?v="+Date.now())).text()),slug:f.name.slice(0,-3)})));
+  buildCats(); render();
+ }catch(e){$("count").textContent="知识库加载失败，请检查 GitHub 文件路径。";console.error(e)}
+}
+function buildCats(){
+ const cats=["全部",...new Set(all.map(x=>x.category).filter(Boolean))];
+ $("cats").innerHTML=cats.map(x=>`<button class="chip ${x===currentCat?"on":""}" data-cat="${esc(x)}">${esc(x)}</button>`).join("");
+ document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{currentCat=b.dataset.cat;buildCats();render()});
+}
+function render(){
+ const kw=$("search").value.trim().toLowerCase();
+ const rows=all.filter(x=>(currentCat==="全部"||x.category===currentCat)&&(`${x.title} ${x.summary} ${x.category} ${x.spanish} ${x.body}`.toLowerCase().includes(kw)));
+ $("count").textContent=`找到 ${rows.length} 条 / 共 ${all.length} 条`;
+ $("grid").innerHTML=rows.map(x=>`<article class="card" onclick="openDetail('${encodeURIComponent(x.slug)}')">
+   ${x.cover?`<img src="${esc(x.cover)}" alt="">`:""}
+   <span class="tag">${esc(x.category||"其他")}</span>
+   <h2>${esc(x.title)}</h2><div class="summary">${esc(x.summary||"")}</div><div class="more">查看详细信息 →</div>
+ </article>`).join("");
+ if(!rows.length) $("grid").innerHTML='<div class="empty">没有找到相关内容，换个关键词试试。</div>';
+}
+$("search").addEventListener("input",render);
+function openDetail(encoded){
+ const x=all.find(a=>a.slug===decodeURIComponent(encoded)); if(!x)return;
+ $("listView").style.display="none"; $("detailView").style.display="block";
+ $("detailView").innerHTML=`<section class="detail">
+   <button class="back" onclick="showList()">← 返回 Q&A 列表</button>
+   <span class="tag">${esc(x.category||"其他")}</span>
+   <h2>${esc(x.title)}</h2>
+   ${x.cover?`<img class="cover" src="${esc(x.cover)}" alt="">`:""}
+   <div class="answer"><strong>📌 简短答案</strong><br>${esc(x.summary||"")}</div>
+   <div class="body">${mdToHtml(x.body||"")}</div>
+   ${x.spanish?`<div class="spanish"><strong>🇪🇸 西班牙语话术</strong><pre id="spanishText">${esc(x.spanish)}</pre><button class="copy" onclick="copySpanish()">复制话术</button></div>`:""}
+ </section>`;
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function showList(){$("detailView").style.display="none";$("listView").style.display="block";window.scrollTo({top:0,behavior:"smooth"})}
+function copySpanish(){
+ const t=$("spanishText")?.innerText||"";
+ navigator.clipboard.writeText(t).then(()=>alert("已复制 ✅")).catch(()=>alert(t));
+}
+load();
 </script>
 </body></html>
