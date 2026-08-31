@@ -1,0 +1,40 @@
+media:
+  input: media
+  output: /media
+
+content:
+  - name: qa
+    label: Q&A 知识库
+    type: collection
+    path: content/qa
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    view:
+      fields: [title, category, featured]
+      primary: title
+      sort: title
+    fields:
+      - name: title
+        label: Q&A 问题
+        type: string
+        required: true
+      - name: category
+        label: 分类
+        type: string
+        required: true
+      - name: summary
+        label: 简短答案
+        type: text
+      - name: spanish
+        label: 西班牙语话术
+        type: text
+      - name: cover
+        label: 封面图片
+        type: image
+      - name: featured
+        label: 推荐问题
+        type: boolean
+        default: false
+      - name: body
+        label: 详细内容
+        type: rich-text
