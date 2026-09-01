@@ -3,7 +3,7 @@ title: BL / Telex 是什么？
 category: 提单
 summary: |-
   Telex = 电放；
-  BL=提单
+  BL=提单， 再目的国释放
   船开之后，船公司会发给外贸公司提单。
   开船后才能给客户发送提单。
 featured: false
