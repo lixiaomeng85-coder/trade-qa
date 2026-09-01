@@ -47,14 +47,38 @@ function parseMd(md){
  if(md.startsWith("---")){
    const end=md.indexOf("\n---",3);
    if(end>0){
-     md.slice(3,end).trim().split("\n").forEach(line=>{
-       const i=line.indexOf(":");
-       if(i>0){
-         let k=line.slice(0,i).trim(), v=line.slice(i+1).trim();
+     const lines=md.slice(3,end).split("\n");
+     for(let i=0;i<lines.length;i++){
+       const line=lines[i];
+       const m=line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+       if(!m) continue;
+       const k=m[1], rest=m[2];
+       const bm=rest.match(/^(\||>)(-?)\s*$/);
+       if(bm){
+         // YAML 多行块：| 字面量(保留换行)，> 折叠(换行转空格)
+         const folded=bm[1]===">";
+         const buf=[];
+         i++;
+         while(i<lines.length && (/^[ \t]/.test(lines[i]) || lines[i].trim()==="")){ buf.push(lines[i]); i++; }
+         i--;
+         if(folded){
+           let out="";
+           for(const l of buf){
+             const t=l.replace(/^[ \t]+/,"").replace(/[ \t]+$/,"");
+             if(t===""){ if(!out.endsWith("\n")) out+="\n"; }
+             else if(out && !out.endsWith("\n")){ out+=" "+t; }
+             else { out+=t; }
+           }
+           front[k]=out.trim();
+         } else {
+           front[k]=buf.map(l=>l.replace(/^[ \t]+/,"")).join("\n").replace(/\n{2,}/g,"\n").trim();
+         }
+       } else {
+         let v=rest;
          v=v.replace(/^"(.*)"$/,"$1").replace(/\\\"/g,'"');
          front[k]=v;
        }
-     });
+     }
      body=md.slice(end+4).trim();
    }
  }
