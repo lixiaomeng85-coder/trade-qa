@@ -1,24 +1,13 @@
 ---
-title: "FOB 目的港费用谁负责？"
-category: "FOB"
-summary: "FOB 负责到中国港口，之后的费用客户需要咨询自己的当地货代。"
-spanish: ""
-cover: ""
+title: FOB 目的港费用谁负责？
+category: FOB
+summary: FOB 负责到中国港口，之后的费用客户需要咨询自己的当地货代。
+spanish: >-
+  1. costo FOB  incluye todos costo desde nuestra bodega hasta despachar al
+  barco en china
+
+  2. costo fob es costo interno de china, incluye costo de envio desde mi bodega
+  hasta bodega del puerto chino, impuestos de china, costo de aduana, documentos
+  de aduana, costo del puerto chino, etc hasta despachar al barco en china
 featured: false
 ---
-
-## 简短答案
-
-FOB 负责到中国港口，之后的费用客户需要咨询自己的当地货代。
-
-## 详细说明
-
-请在这里补充更完整的处理流程、注意事项、案例和内部经验。
-
-## 西班牙语话术
-
-<!-- 需要西语回复时，可直接填写在这里。 -->
-
-## 相关图片
-
-<!-- 在“详细说明”或本区域插入图片即可。上传后图片会显示在 Q&A 详情页。 -->
