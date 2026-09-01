@@ -6,7 +6,6 @@ summary: |-
   BL=提单
   船开之后，船公司会发给外贸公司提单。
   开船后才能给客户发送提单。
-spanish: /
 featured: false
 ---
 ## 简短答案
