@@ -1,5 +1,5 @@
 ---
-title: FOB 目的港费用谁负责？
+title: 什么是FOB？
 category: FOB
 summary: FOB 负责到中国港口，之后的费用客户需要咨询自己的当地货代。
 spanish: >-
