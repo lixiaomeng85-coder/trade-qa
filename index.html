@@ -16,7 +16,7 @@ main{padding:28px 0 55px}.top{display:flex;justify-content:space-between;gap:15p
 .card h2{font-size:17px;line-height:1.5;margin:10px 0}.summary{color:#596273;line-height:1.7;font-size:14px}.more{margin-top:12px;color:#4f46e5;font-size:14px;font-weight:600}
 .detail{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:26px;max-width:920px;margin:auto}.back{border:0;background:none;color:#4f46e5;padding:0;margin-bottom:18px;cursor:pointer;font-size:15px}
 .detail h2{font-size:29px;margin:5px 0 10px}.detail .cover{max-width:100%;max-height:430px;object-fit:cover;border-radius:14px;margin:12px 0 20px}.answer{background:#f8fafc;border:1px solid #eef0f3;border-radius:12px;padding:16px;line-height:1.75}
-.body{line-height:1.9;color:#374151}.body h2,.body h3{color:#172033;margin-top:26px}.body img{display:block;max-width:100%;border-radius:13px;margin:14px 0}.body a{color:#4f46e5}
+.body{line-height:1.9;color:#374151}.body h2,.body h3{color:#172033;margin-top:26px}.body img{display:block;max-width:100%;border-radius:13px;margin:14px 0}.body a{color:#4f46e5}.body ul,.body ol,.answer ul{margin:8px 0;padding-left:24px}.body li,.answer li{margin:4px 0}.body table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px}.body th,.body td{border:1px solid #e5e7eb;padding:8px 10px;text-align:left}.body th{background:#f8fafc;color:#172033}
 .spanish{margin-top:20px;background:#f5f3ff;border:1px solid #ddd6fe;border-radius:13px;padding:15px}.spanish pre{white-space:pre-wrap;font:inherit;line-height:1.7;margin:10px 0}
 .copy{border:0;border-radius:9px;background:#111827;color:#fff;padding:9px 13px;cursor:pointer}
 .notice{margin-top:22px;padding:14px 16px;background:#fff7ed;border:1px solid #fed7aa;border-radius:13px;color:#9a3412;line-height:1.65;font-size:14px}
@@ -90,16 +90,43 @@ function mdToHtml(md){
  s=s.replace(/^### (.*)$/gm,"<h3>$1</h3>").replace(/^## (.*)$/gm,"<h2>$1</h2>");
  s=s.replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>");
  s=s.replace(/`([^`]+)`/g,"<code>$1</code>");
+ // 无序列表：连续 - 或 * 开头
+ s=s.replace(/(?:^|\n)((?:[ \t]*[-*][ \t]+.*(?:\n|$))+)/g,(m,block)=>{
+   const items=block.trim().split("\n").map(l=>l.replace(/^[ \t]*[-*][ \t]+/,"").trim()).filter(Boolean);
+   return "\n<ul>"+items.map(i=>"<li>"+i+"</li>").join("")+"</ul>\n";
+ });
+ // 有序列表：连续 数字. 或 数字、 开头
+ s=s.replace(/(?:^|\n)((?:[ \t]*\d+[.、][ \t]+.*(?:\n|$))+)/g,(m,block)=>{
+   const items=block.trim().split("\n").map(l=>l.replace(/^[ \t]*\d+[.、][ \t]+/,"").trim()).filter(Boolean);
+   return "\n<ol>"+items.map(i=>"<li>"+i+"</li>").join("")+"</ol>\n";
+ });
+ // 表格：连续 | ... | 行
+ s=s.replace(/((?:^\|.*\|[ \t]*\n)+)/gm,(m)=>{
+   const lines=m.trim().split("\n").filter(Boolean);
+   if(lines.length<1) return m;
+   const rows=lines.map(l=>l.replace(/^\|/,"").replace(/\|$/,"").split("|").map(c=>c.trim()));
+   const head=rows[0];
+   const bodyRows=rows.slice(1).filter(r=>!r.every(c=>/^:?-+:?$/.test(c)));
+   let h="<table><thead><tr>"+head.map(c=>"<th>"+c+"</th>").join("")+"</tr></thead><tbody>";
+   for(const r of bodyRows){ h+="<tr>"+r.map(c=>"<td>"+c+"</td>").join("")+"</tr>"; }
+   return "\n"+h+"</tbody></table>\n";
+ });
  s=s.replace(/\n\n/g,"<br><br>").replace(/\n/g,"<br>");
  return s;
 }
 async function load(){
  try{
-  const r=await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/content/qa?ref=${branch}`,{cache:"no-store"});
+  // 用 git trees API 一次性递归列出 content/qa 下所有文件（含子文件夹）
+  const r=await fetch(`https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=1`,{cache:"no-store"});
   if(!r.ok) throw new Error("GitHub API error "+r.status);
-  const files=await r.json();
-  const mdFiles=files.filter(x=>x.name.endsWith(".md"));
-  all=await Promise.all(mdFiles.map(async f=>({...parseMd(await (await fetch(f.download_url+"?v="+Date.now())).text()),slug:f.name.slice(0,-3)})));
+  const tree=await r.json();
+  const mdFiles=(tree.tree||[]).filter(x=>x.type==="blob"&&x.path.startsWith("content/qa/")&&x.path.endsWith(".md"));
+  all=await Promise.all(mdFiles.map(async f=>{
+    const rel=f.path.slice("content/qa/".length,-3);
+    const enc=f.path.split("/").map(encodeURIComponent).join("/");
+    const text=await (await fetch(`https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${enc}?v=${Date.now()}`)).text();
+    return {...parseMd(text),slug:rel};
+  }));
   buildCats(); render();
  }catch(e){$("count").textContent="知识库加载失败，请检查 GitHub 文件路径。";console.error(e)}
 }
