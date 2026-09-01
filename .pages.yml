@@ -8,9 +8,8 @@ content:
     type: collection
     path: content/qa
     format: yaml-frontmatter
-    filename:
-      template: "{year}-{month}-{day}-{primary}.md"
-      field: create
+    subfolders: false
+    filename: "{year}-{month}-{day}-{hour}-{minute}-{primary}.md"
     view:
       fields: [title, category, featured]
       primary: title
@@ -22,8 +21,42 @@ content:
         required: true
       - name: category
         label: 分类
-        type: string
+        type: select
         required: true
+        options:
+          values:
+            - FOB
+            - DDP
+            - CIF
+            - 贸易术语
+            - 基础术语
+            - 提单
+            - 收货人
+            - 报价
+            - 报关
+            - 清关
+            - 海关
+            - 海运
+            - 空运
+            - 快递
+            - 订舱
+            - 集装箱
+            - 整柜
+            - 散货
+            - 包装
+            - 税号
+            - 付款
+            - 订单
+            - 仓库
+            - 供应商
+            - 客户沟通
+            - 特殊品
+            - 电池/特殊品
+            - 侵权/合规
+            - 阿根廷
+            - 秘鲁
+            - 玻利维亚
+            - 资料
       - name: summary
         label: 简短答案
         type: text
