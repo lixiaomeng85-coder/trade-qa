@@ -6,7 +6,7 @@ summary: |-
 
   不支持： paypal, mastercard
 
-  转账的时候，如果客户银行找不到义乌浙商银行，可以选杭州
+  转账的时候，如果客户银行找不到义乌浙商银行，可以选杭州，如图
 cover: /media/b3d1521469801ebd78e9f26ff1a49eb7-2.png
 featured: false
 ---
