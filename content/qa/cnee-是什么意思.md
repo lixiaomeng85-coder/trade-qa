@@ -5,7 +5,3 @@ summary: CNEE 是收货人的意思。
 spanish: 全称：consignee
 featured: false
 ---
-## 简短答案
-
-CNEE 是收货人的意思。全称：consignee。
-
